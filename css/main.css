@@ -1,3 +1,19 @@
+/* Classes utilistaires */
+[class*="clear"]{
+  clear: both;
+}
+
+.clear2{height:2px;}
+.clear5{height:5px;}
+.clear10{height:10px;}
+.clear15{height:15px;}
+.clear20{height:20px;}
+.clear25{height:25px;}
+.clear30{height:30px;}
+.clear50{height:50px;}
+.clear100{height:100px;}
+.clear200{height:200px;}
+
 body,
 html {
   width: 100%;
@@ -142,8 +158,18 @@ header.masthead p {
   text-align: center;
 }
 
+#chercherMeteoContainer{
+  text-align: center;
+  width: 100%;
+}
+
 #meteo{
   font-weight: bold;
+}
+
+.chercherMeteoInput{
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .footer{

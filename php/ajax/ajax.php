@@ -15,12 +15,14 @@ function setVille(){
 		$longitude = $_POST["longitude"];
 		$latitude = $_POST["latitude"];
 
-		$_SESSION['lat'] = $latitude; // Si la geolocalisation a marché 
+		$_SESSION['lat'] = $latitude; // Si la geolocalisation a marché
 		$_SESSION['long'] = $longitude;
 
 		echo $_SESSION['lat'] . $_SESSION['long'];
 	}
+}
 
+function voirMeteoVille(){
 	
 }
 

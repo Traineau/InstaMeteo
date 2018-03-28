@@ -32,19 +32,19 @@
   <body id="page-top">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand navbar-light fixed-top" id="mainNav">
       <div class="container">
 
-      	<div class="col-lg-3">
+      	<div class="col-3">
 	      	<span id="instagramLogo"></span>
 	        <a class="navbar-brand js-scroll-trigger" href="#page-top">InstaMeteo</a>
 	    </div>
 
-        <div id="meteo" class="col-lg-3">
+        <div id="meteo" class="col-3">
 <?php
 
-            if(isset($_SESSION['lat']) && isset($_SESSION['long'])){ 
-                $lat = $_SESSION['lat']; // Si la geolocalisation a marché    
+            if(isset($_SESSION['lat']) && isset($_SESSION['long'])){
+                $lat = $_SESSION['lat']; // Si la geolocalisation a marché
                 $long = $_SESSION['long'];
             }else{
                 $long  = 2.3466110229492188; // Sinon on prend les coordonnées de Paris
@@ -56,7 +56,7 @@
             if(!isset($_SESSION['ville'])){
 
             	// Localisation, pour récupérer la ville en fonction de la latitude et la longitude
-            	$geocode=file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$long.'&sensor=false'); 
+            	$geocode=file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$long.'&sensor=false');
 
 	            // On regarde parmis toutes les localisations de l'API si une ville correspond
 	            $output= json_decode($geocode);
@@ -73,7 +73,7 @@
 		                    $ville = $_SESSION['ville'] = $output->results[0]->address_components[$j]->long_name;
 		                }
 		            }
-		          
+
 	            }else{
 	            	$ville = "Paris";
 	            }
@@ -82,9 +82,9 @@
             }
 
             // Récupération de la météo de la ville grace a l'API openWeatherMap
-            $url="http://api.openweathermap.org/data/2.5/weather?q=".$ville.",fr&APPID=1389b1a0fd9f33f0aad25e67cb48e130&units=metric";
+          $url="http://api.openweathermap.org/data/2.5/weather?q=".$ville.",fr&APPID=1389b1a0fd9f33f0aad25e67cb48e130&units=metric";
 	        $json=@file_get_contents($url);
-	        $data=json_decode($json,true);          
+	        $data=json_decode($json,true);
 
 	        // En fonction du temps donné, on traduit et on récupère le titre de l'image approprié
 	        switch ($data['weather'][0]['main']) {
@@ -99,11 +99,11 @@
 	            case 'Drizzle':
 	            $temps = 'pluie';
 	            $title = "Pluie";
-	            break; 
+	            break;
 	            case 'Snow':
 	            $temps = 'neige';
 	            $title = "Neige";
-	            break;                       
+	            break;
 	            case 'Thunderstorm':
 	            $temps = 'orage';
 	            $title = "Orages";
@@ -118,23 +118,23 @@
 	            break;
 	        }
 
-	        echo 
+	        echo
 	        	'<div class="col-4" style="float:left;">
 	        		<img width="60px" title="'.$title.'" id="image_meteo" src="images/'.$temps.'.png">
 	        	</div>
-	        	<div class="col-8 text-uppercase" style="float:left;margin-top:20px">'.$ville." ".$data["main"]["temp"].' °C</div>';
+	        	<div class="col-8 text-uppercase" style="float:left;margin-top:20px">'.$ville." ".round($data["main"]["temp"]).' °C</div>';
 
-            
 
-	        
+
+
 ?>
     </div>
-    <div class="col-lg-6">
+    <div class="col-6">
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
             	<div class="row">
-				  <div class="col-lg-6">
+				  <div class="col-6">
 				    <div class="input-group">
 				      <input type="text" class="form-control" placeholder="Chercher une personne">
 				      <span class="input-group-btn">
@@ -142,11 +142,11 @@
 				      </span>
 				    </div>
 				  </div>
-				  <div class="col-lg-6">
+				  <div class="col-6">
 				    <div class="input-group">
-				      <input type="text" class="form-control" placeholder="Chercher un lieu ">
+				      <input id="inputVille" type="text" class="form-control" placeholder="Chercher un lieu ">
 				      <span class="input-group-btn">
-				        <button class="btn btn-default" type="button">Go!</button>
+				        <button id="chercherMeteoVille" class="btn btn-default" type="button">Go!</button>
 				      </span>
 				    </div>
 				  </div>
@@ -159,30 +159,81 @@
     <header class="masthead text-center text-white d-flex">
       <div class="container my-auto">
         <div class="row">
-          <div class="col-lg-10 mx-auto">
+          <div class="col-10 mx-auto">
             <h1 class="text-uppercase">
               <strong>Bienvenue sur InstaMeteo</strong>
             </h1>
             <hr>
           </div>
-          <div class="col-lg-8 mx-auto">
+          <div class="col-8 mx-auto">
             <p class="text-faded mb-5">Ce site a été conçu afin d'aider les photographes à planifier leurs shooting photos. Voir les photos d'un lieu, prévoir la météo, trouver des modèles photos, tout est possible!</p>
           </div>
         </div>
       </div>
     </header>
+
+		<div id="chercherMeteoContainer">
+
+			<div class="clear30"></div>
+
+			<div class="row">
+				<div class="col-10 mx-auto">
+					<h1 class="text-uppercase">
+						<strong>Rechercher la météo d'un lieu</strong>
+					</h1>
+					<hr>
+				</div>
+				<div class="col-12">
+					<p class="mb-5">Vous pouvez voir ici la météo de n'importe quelle ville en direct</p>
+				</div>
+
+				<div class="clear50"></div>
+
+				<div class="chercherMeteoAffichage col-12">
+
+<?php
+				echo
+					'<div class="col-6" style="float:left;">
+						<img  style="float:right;" width="150px" title="'.$title.'" id="image_meteo" src="images/'.$temps.'.png">
+					</div>
+					<div class="col-6 text-uppercase" style="float:left;margin-top:20px">
+						<p style="float:left;">'.$ville." ".round($data["main"]["temp"]).' °C</p><br/><br/>
+						<p style="float:left;">Pression : '.$data['main']['pressure'].' hPa</p>
+					</div>';
+
+?>
+				</div>
+
+				<div class="col-12 chercherMeteoRecherche" style="margin-top:50px;">
+					<div class="input-group chercherMeteoInput">
+						<input type="text" class="form-control" placeholder="Chercher une ville ">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">Go!</button>
+						</span>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="clear200"></div>
+
+
+
       <div id="chercherPersonneContainer" class="container my-auto">
         <div class="row">
-          <div class="col-lg-10 mx-auto">
+          <div class="col-10 mx-auto">
             <h1 class="text-uppercase">
               <strong>Rechercher une personne</strong>
             </h1>
             <hr>
           </div>
-          <div class="col-lg-8 mx-auto">
-            <p class="text-faded mb-5">Si vous recherchez ici une personne avec la barre de recherche, ses photos instagram s'afficheront!</p>
+          <div class="col-8 mx-auto">
+            <p class="mb-5">Si vous recherchez ici une personne avec la barre de recherche, ses photos instagram s'afficheront!</p>
           </div>
         </div>
+			</div>
+
 
 
     <script src="js/jquery-3.3.1.js"></script>
