@@ -12,12 +12,18 @@
 .clear30{height:30px;}
 .clear50{height:50px;}
 .clear100{height:100px;}
+.clear150{height:150px;}
 .clear200{height:200px;}
 
+.bold{
+  font-weight: bold;
+}
+
+/* Classes générales */
 body,
 html {
-  width: 100%;
-  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -52,18 +58,6 @@ h4,
 h5,
 h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-}
-
-#instagramLogo{
-  background-image: url("../images/instagramLogo.png");
-  width: 40px;
-  height: 40px;
-  margin-right: 20px;
-  background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 
 .bg-primary {
@@ -108,6 +102,8 @@ img::-moz-selection {
   background: transparent;
 }
 
+/* Le header */
+
 #mainNav {
   border-bottom: 1px solid rgba(33, 37, 41, 0.1);
   background-color: #fff;
@@ -129,7 +125,7 @@ img::-moz-selection {
 }
 
 
-header.masthead {
+.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 56px);
   background-image: url("../images/header.jpg");
@@ -141,23 +137,29 @@ header.masthead {
   background-size: cover;
 }
 
-header.masthead hr {
+.masthead hr {
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-header.masthead h1 {
+.masthead h1 {
   font-size: 2rem;
 }
 
-header.masthead p {
+.masthead p {
   font-weight: 300;
 }
 
-#chercherPersonneContainer{
-  text-align: center;
+#instagramLogo img{
+  width: 40px;
+  height: 40px;
 }
 
+#navbarResponsive a{
+  color: black;
+}
+
+/* Section rechercher une ville pour voir la météo*/
 #chercherMeteoContainer{
   text-align: center;
   width: 100%;
@@ -167,57 +169,296 @@ header.masthead p {
   font-weight: bold;
 }
 
-.chercherMeteoInput{
+.mainInput{
   max-width: 500px;
   margin: 0 auto;
 }
 
-.footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    background: #000000;
-    color: #FFFFFF;
+#chercherMeteoAffichage p{
+    text-align: center;
+    margin: 0!important;
+    float: left;
+}
+
+/* Loading circulaire */
+
+@-webkit-keyframes rotate-forever {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes rotate-forever {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-forever {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+#spinner {
+  -webkit-animation-duration: 0.75s;
+  -moz-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: rotate-forever;
+  -moz-animation-name: rotate-forever;
+  animation-name: rotate-forever;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  animation-timing-function: linear;
+  height: 150px;
+  width: 150px;
+  border: 8px solid #f80;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#spinner{
+  margin: 0 auto;
+}
+
+/* Section rechercher une personne */
+
+#chercherPersonneContainer{
+  text-align: center;
+  background: linear-gradient(#E6E6E6, #ffffff);
+}
+
+/* Barre de progression */
+@import "compass/css3";
+
+.progress {
+  width: 100%;
+  height: 50px;
+}
+
+.progress-wrap {
+  background: #f80;
+  margin: 20px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  background: #ddd;
+  left: 0;
+  position: absolute;
+  top: 0;
 }
 
 #lesPhotos img:hover{
-  overflow: hidden;
-  -moz-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  cursor: pointer;
+  -moz-transform: scale(1.01);
+  -webkit-transform: scale(1.01);
+  transform: scale(1.01);
 }
 
 #lesPhotos img{
-  max-width: 100%;
-
-  padding: 5px;
-  
-  -moz-transition: all 0.3s;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  padding: 2px;
 }
 
+.box {
+     -webkit-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+     -moz-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+     -ms-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+     -o-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+     transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+
+     -webkit-transition-property: left, right, top;
+     -moz-transition-property: left, right, top;
+     -ms-transition-property: left, right, top;
+     -o-transition-property: left, right, top;
+     transition-property: left, right, top;
+}
+
+/* Footer */
+/*--footer--*/
+
+#footer {
+    background: #000;
+    padding: 3em 0;
+    position: relative;
+}
+
+#footer img{
+    width: 35px;
+    height: 40px;
+    margin-left: 7px;
+    margin-top: 1.5px;
+}
+
+#footer p {
+    text-align: center;
+    color: #fff;
+    letter-spacing: 2px;
+    font-weight: 100;
+}
+
+#footer p a {
+    color: #00bce4;
+}
+
+#footer p a:hover {
+    text-decoration: underline;
+}
+
+
+/*-- Fleche vers le haut--*/
+
+.arrow-container,
+.arrow-1 {
+    width: 90px;
+    height: 90px;
+}
+
+.arrow-container {
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 5%;
+}
+
+.arrow-1 {
+    background: #00bce4;
+    opacity: 0.5;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.arrow-2 {
+    width: 50px;
+    height: 50px;
+    background: #00bce4;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1;
+    display: table;
+}
+
+.arrow-2:focus {
+    text-decoration: none;
+}
+
+.arrow-2:before {
+    width: 42px;
+    height: 42px;
+    content: "";
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+
+/* Animation de la fleche */
+
+.animated.hinge {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+}
+
+@-webkit-keyframes zoomIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale3d(.4, .4, .4);
+        transform: scale3d(.4, .4, .4);
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale3d(.4, .4, .4);
+        transform: scale3d(.4, .4, .4);
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.zoomIn {
+    -webkit-animation-name: zoomIn;
+    animation-name: zoomIn;
+}
+
+.animated.infinite {
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+/* Media queries pour la responsivité */
 @media (min-width: 768px) {
-  header.masthead p {
+  .masthead p {
     font-size: 1.15rem;
   }
 }
 
 @media (min-width: 992px) {
-  header.masthead {
+  .masthead {
     height: 100vh;
     min-height: 650px;
     padding-top: 0;
     padding-bottom: 0;
   }
-  header.masthead h1 {
+  .masthead h1 {
     font-size: 3rem;
   }
 }
 
 @media (min-width: 1200px) {
-  header.masthead h1 {
+  .masthead h1 {
     font-size: 4rem;
   }
 }
