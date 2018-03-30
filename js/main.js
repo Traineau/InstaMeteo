@@ -141,11 +141,16 @@ function afficherPhotos(id){
     }, animationLength);
 
     $.ajax({
-        url: 'https://instagram.com/graphql/query/?query_id=17888483320059182&variables={"id":"' + id + '","first":50,"after":null}',
-        type: 'GET',
+        url: 'php/model.php',
+        type: 'POST',
         dataType: 'JSON',
+        data: {
+            action: 'getPhotos',
+            id: id
+        },
 
         success: function(retour) {
+            /*
 
             // Si l'utilisateur est introuvable
             if(retour["data"]["user"] == null){
@@ -188,7 +193,7 @@ function afficherPhotos(id){
 
                 // Affichage des photos récupérées
                 $('#lesPhotos').append(boxes).nested('append',boxes);
-            }
+            }*/
         },
 
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -203,7 +208,7 @@ function afficherPhotos(id){
 
 function setPosition(position) {
     $.ajax({
-        url: 'php/ajax/ajax.php', // La ressource ciblée
+        url: 'php/model.php', // La ressource ciblée
         type: 'POST',
         dataType: 'JSON',
         data: {
@@ -213,7 +218,7 @@ function setPosition(position) {
         },
 
         complete: function(response) {
-            //location.reload();
+            location.reload();
         }
     });
 
