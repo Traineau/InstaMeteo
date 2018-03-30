@@ -29,34 +29,20 @@ function searchUsers(){
     url = clearUrl(url);
     $.ajax({
         url: url,
-        type: 'GET',
-        headers: {"Access-Control-Allow-Origin" : "http://mv-wss.handysofts.com"},
-        dataType: 'JSON',
+        type: 'POST',
         success: function(data) {
 
           $.each( data.users, function( index, user ) {
               console.log(user.id);
 
-              /*var searchResult = $('#search-result-item-template').clone();
-
-              if (user.website == null || !user.website.startsWith("http"))
-                  searchResult.find('#website').remove();
-
-              searchResult.find("#profilePicture").attr("src", user.profilePicture);
-              searchResult = searchResult.html()
-                              .replace(/#user.profilePicture#/g, user.profilePicture)
-                              .replace(/#user.fullName#/g, user.fullName)
-                              .replace(/#user.username#/g, user.username)
-                              .replace(/#user.id#/g, user.id)
-                              .replace(/#user.bio#/g, user.bio)
-                              .replace(/#user.website#/g, user.website);
-
-              $('#search-results').append(searchResult);*/
           });
         }
     });
 
 }
+
+
+
 /**
  * Urls with .sh returns error to prevent execution of sh
  *

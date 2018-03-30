@@ -23,7 +23,6 @@ function setVille(){
 }
 
 function getPhotos(){
-
 	// Verification que la requete ajax soit passé avec un id d'utilisateur
 	if(!isset($_POST['id'])){
 		die('Erreur');
@@ -31,19 +30,24 @@ function getPhotos(){
 		$id = $_POST['id'];
 		$url = 'https://instagram.com/graphql/query/?query_id=17888483320059182&variables={"id":"' . $id . '","first":50,"after":null}';
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-		// This is what solved the issue (Accepting gzip encoding)
-		curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-		$response = curl_exec($ch);
-		curl_close($ch);
+		$response = file_get_contents($url);
 
-	    echo "Resultats : ".$response;
+	    echo($response);
 	}
-	
+}
+
+function getMeteo(){
+	// Verification que la requete ajax soit passé avec un id d'utilisateur
+	if(!isset($_POST['ville'])){
+		die('Erreur');
+	}else{
+		$ville = $_POST['ville'];
+		$url = 'http://api.openweathermap.org/data/2.5/weather?q='.$ville.'&APPID=1389b1a0fd9f33f0aad25e67cb48e130&units=metric';
+
+		$response = file_get_contents($url);
+
+	    echo($response);
+	}
 }
 
 

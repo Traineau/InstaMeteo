@@ -37,16 +37,20 @@ function afficherVille(nomVille){
     $("#affichageLeverSoleil").html('');
     $("#affichageCoucherSoleil").html('');
 
-    //$("#spinner").css("display", "block");
+    $("#spinner").css("display", "block");
 
     $.ajax({
-        url: 'http://api.openweathermap.org/data/2.5/weather?q=' + nomVille + '&APPID=1389b1a0fd9f33f0aad25e67cb48e130&units=metric', // La ressource ciblée
-        type: 'GET',
+        url: 'php/model.php', // La ressource ciblée
+        type: 'POST',
         timeout: 3000,
         dataType: 'JSON',
+        data: {
+            action: 'getMeteo',
+            ville: nomVille
+        },
         success: function(retour) {
-            //$("#spinner").css("display", "none");
             console.log(retour);
+            $("#spinner").css("display", "none");
 
             var infosImage = recupererImage(retour['weather'][0]['main']);
 
@@ -65,7 +69,7 @@ function afficherVille(nomVille){
         },
 
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            //$("#spinner").css("display", "none");
+            $("#spinner").css("display", "none");
             $("#affichageVilleTemperature").html("<h2>Ville introuvable</h2>");
         }
     });
@@ -150,8 +154,6 @@ function afficherPhotos(id){
         },
 
         success: function(retour) {
-            /*
-
             // Si l'utilisateur est introuvable
             if(retour["data"]["user"] == null){
                 // On cache la barre de chargement
@@ -193,7 +195,7 @@ function afficherPhotos(id){
 
                 // Affichage des photos récupérées
                 $('#lesPhotos').append(boxes).nested('append',boxes);
-            }*/
+            }
         },
 
         error: function(XMLHttpRequest, textStatus, errorThrown) {
