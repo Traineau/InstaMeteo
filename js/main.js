@@ -118,18 +118,18 @@ function dateHeureMinute(timestamp){
 
 
 // Fonction qui utilise l'api d'instagram pour afficher les photos d'un utilisateur
-function afficherPhotos(id){
-    $("#lesPhotos").html("");
+function afficherPhotos(pseudo){
 
+    var id = getIdFromPseudo(pseudo);
+
+    $("#lesPhotos").html("");
     // Le tableau contenant toutes nos nouvelles div avec les images
     var boxes = [];
 
     // Gestion de la barre de chargement
     // C'est uniquement du visuel, pour montrer a l'utilisateur qu'il faut patienter
-
     // On remet la barre a 0
     $(".progress-bar").css("left", "0px");
-
     // Affichage de la barre
     $(".progress-wrap").css("display", "block");
 
@@ -139,7 +139,7 @@ function afficherPhotos(id){
     var progressTotal = getPercent * getProgressWrapWidth;
     var animationLength = 500;
 
-    // On mance l'animation, qui dure 1 sec
+    // On lance l'animation, qui dure 0.5 sec
     $('.progress-bar').animate({
         left: progressTotal
     }, animationLength);
@@ -152,21 +152,16 @@ function afficherPhotos(id){
             action: 'getPhotos',
             id: id
         },
-
         success: function(retour) {
             // Si l'utilisateur est introuvable
             if(retour["data"]["user"] == null){
                 // On cache la barre de chargement
                 $(".progress-wrap").css("display", "none");
-
                 // Affichage des photos récupérées
                 $('#lesPhotos').append("<h2>Utilisateur introuvable</h2>");
-
             }else{
                 // On récupère les infos qui nous intéressent
                 object = retour["data"]["user"]["edge_owner_to_timeline_media"]["edges"];
-
-                console.log(object);
 
                 // Pour chaque photo récupérée, on les ajoute dans notre view
                 $.each(object, function(index, value) {
@@ -183,7 +178,6 @@ function afficherPhotos(id){
                     }else{
                         var title = "Photo";
                     }
-                    
 
                     var boxe = '<div class="box size' +  nombre +  nombre +'">'
                             + '<a href="' + link + '" target="blank"><img src="' + url + '"  title="' + title + '"></a></div>';
@@ -201,11 +195,35 @@ function afficherPhotos(id){
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             // On cache la barre de chargement
             $(".progress-wrap").css("display", "none");
-
             // Affichage des photos récupérées
             $('#lesPhotos').append("Une erreur est survenue, veuillez réessayer");
         }
     });
+}
+
+function getIdFromPseudo(pseudo){
+    var id;
+    var searchUrl = 'http://mv-wss.handysofts.com/mv-wss/insprofilefinder/api/v1/user/profile/search/%s';
+    var url = searchUrl.replace("%s", pseudo);
+
+    $.ajax({
+        url: 'php/model.php',
+        type: 'POST',
+        dataType: 'JSON',
+        async: false,
+        data: {
+            url: url,
+            action: 'getPseudo',
+        },
+        success: function(data) {
+          $.each( data.users, function( index, user ) {
+                id = user.id;
+          });
+        }
+    });
+
+    console.log(id);
+    return id;
 }
 
 function setPosition(position) {

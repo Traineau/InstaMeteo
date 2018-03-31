@@ -118,7 +118,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="input-group">
-                                            <input id="chercherIdInputHeader" type="text" class="form-control" placeholder="Entrez un id">
+                                            <input id="chercherIdInputHeader" type="text" class="form-control" placeholder="Entrez un pseudo">
                                             <span class="input-group-btn">
                                             <a id="chercherIdBoutonHeader" href="#chercherPersonneContainer" class="scroll btn btn-default" type="button">Go!</a>
                                             </span>
@@ -216,7 +216,7 @@
                     <div class="col-12 mx-auto">
                         <p class="mb-5">Si vous recherchez ici une personne avec la barre de recherche, ses dernières photos instagram s'afficheront!</p>
                         <div class="input-group mainInput">
-                            <input id="chercherIdInput" type="text" class="form-control" placeholder="Entrez un id">
+                            <input id="chercherIdInput" type="text" class="form-control" placeholder="Entrez un pseudo">
                             <span class="input-group-btn">
                                 <button id="chercherIdBouton" class="btn btn-default" type="button">Go!</button>
                             </span>

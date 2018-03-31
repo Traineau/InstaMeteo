@@ -22,6 +22,17 @@ function setVille(){
 	}
 }
 
+function getPseudo(){
+	if (!isset($_POST["url"])) {
+		die('Erreur');
+	}else{
+		$url = $_POST["url"];
+
+		$response = file_get_contents($url);
+		echo($response);
+	}
+}
+
 function getPhotos(){
 	// Verification que la requete ajax soit passé avec un id d'utilisateur
 	if(!isset($_POST['id'])){
