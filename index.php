@@ -14,7 +14,7 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
         <link href="css/main.css" rel="stylesheet">
-
+		<link rel="icon" type="images/png" href="images/icone.png" />
         <script src="js/jquery-3.3.1.js"></script>
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
@@ -267,7 +267,7 @@
 
             <p>© Tous droits réservés</p>
             <p><a href="https://github.com/Tynyndil/InstaMeteo" target="blank">Voir le code source du projet</a>
-            <p>Auteurs: <a href="mailto:thomasraineau3@gmail.com">Emeric Mottier</a>, <a href="mailto:thomasraineau3@gmail.com">Steven Robillard</a>, <a href="mailto:thomasraineau3@gmail.com">Thomas Raineau</a></p>
+            <p>Auteurs: <a href="mailto:emericmottier72@gmail.com">Emeric Mottier</a>, <a href="mailto:thomasraineau3@gmail.com">Steven Robillard</a>, <a href="mailto:thomasraineau3@gmail.com">Thomas Raineau</a></p>
         </div>
 
     </body>
