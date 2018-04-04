@@ -267,7 +267,7 @@
 
             <p>© Tous droits réservés</p>
             <p><a href="https://github.com/Tynyndil/InstaMeteo" target="blank">Voir le code source du projet</a>
-            <p>Auteurs: <a href="mailto:thomasraineau3@gmail.com">Emeric Mottier</a>, <a href="mailto:thomasraineau3@gmail.com">Steven Robillard</a>, <a href="mailto:thomasraineau3@gmail.com">Thomas Raineau</a></p>
+            <p>Auteurs: <a href="mailto:emericmottier72@gmail.com">Emeric Mottier</a>, <a href="mailto:thomasraineau3@gmail.com">Steven Robillard</a>, <a href="mailto:thomasraineau3@gmail.com">Thomas Raineau</a></p>
         </div>
 
     </body>
