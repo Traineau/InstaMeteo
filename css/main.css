@@ -19,6 +19,14 @@
   font-weight: bold;
 }
 
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+
 /* Classes générales */
 body,
 html {
@@ -105,8 +113,7 @@ img::-moz-selection {
 /* Le header */
 
 #mainNav {
-  border-bottom: 1px solid rgba(33, 37, 41, 0.1);
-  background-color: #fff;
+  background: linear-gradient(#FAFAFA, #D8D8D8);
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -262,6 +269,20 @@ img::-moz-selection {
   background: linear-gradient(#E6E6E6, #ffffff);
 }
 
+#afficherInfosPersonne img{
+  width:150px;
+  border-radius: 50%;
+  border: 2px solid #F05F40;
+}
+
+#nomPersonne{
+  font-weight: bold;
+}
+
+#descriptionPersonne{
+  color: #BDBDBD;
+}
+
 /* Barre de progression */
 @import "compass/css3";
 
@@ -284,17 +305,43 @@ img::-moz-selection {
   top: 0;
 }
 
-#lesPhotos img:hover{
-  cursor: pointer;
-  -moz-transform: scale(1.01);
-  -webkit-transform: scale(1.01);
-  transform: scale(1.01);
+/* Les photos */
+
+#lesPhotos{
+  margin-left: 5%;
 }
 
-#lesPhotos img{
+#containerPhoto{
+  width:100%;
+  height: 90%;
+  overflow: hidden;
+}
+
+#containerPhoto img:hover{
+  cursor: pointer;
+  -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1.3); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1.3); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1.3);
+    transition: all 200ms ease-in;
+    transform: scale(1.3);
+}
+
+#containerPhoto img{
   width: 100%;
   height: 100%;
-  padding: 2px;
+}
+
+#containerActionPhoto{
+  overflow: auto;
+  color: #01A9DB;
+  border: 1px solid grey;
+}
+
+#containerActionPhoto a:hover{
+  text-decoration: none;
 }
 
 .box {

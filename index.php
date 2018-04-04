@@ -225,6 +225,20 @@
 
                     <div class="clear150"></div>
 
+                    <div class="col-12 mx-auto" id="afficherInfosPersonne" style="display:none;">
+                        <h2 id="pseudoPersonne"></h2>
+                        <div id="imagePersonne">
+
+                        </div><br/>
+
+                        <div id="infosPersonne">
+                            <p id="nomPersonne"></p>                            
+                            <p id="descriptionPersonne"></p>
+                        </div>
+                    </div>
+
+                    <div class="clear150"></div>
+
                     <div class="progress-wrap progress" data-progress-percent="100" style="display:none;">
                         <div class="progress-bar progress"></div>
                     </div>

@@ -153,6 +153,7 @@ function afficherPhotos(pseudo){
             id: id
         },
         success: function(retour) {
+            console.log(retour);
             // Si l'utilisateur est introuvable
             if(retour["data"]["user"] == null){
                 // On cache la barre de chargement
@@ -166,11 +167,17 @@ function afficherPhotos(pseudo){
                 // Pour chaque photo récupérée, on les ajoute dans notre view
                 $.each(object, function(index, value) {
                     // Un nombre aléatoire entre 4 et 4.5 pour diversifier un peu la tailel des photos
-                    var nombre = Math.ceil( Math.random() * 1.5 + 4 );
+                    var nombre = Math.ceil( Math.random() * 1 + 5 );
                     // L'url de la photo
                     var url = value["node"]["display_url"];
                     // Le lien
                     var link = 'https://www.instagram.com/p/' + value["node"]["shortcode"] + '/';
+                    // Nombre de like
+                    var nbLike = value["node"]["edge_media_preview_like"]["count"];
+                    // Le nombre de commentaire
+                    var nbCom = value["node"]["edge_media_to_comment"]["count"];
+                    // L'url de l'image
+                    var dlImage = value["node"]["display_url"];
 
                     // Le titre (commentaire publié par l'auteur de la photo sur cette photo)
                     if(typeof value["node"]["edge_media_to_caption"]["edges"]["0"] !== 'undefined'){
@@ -179,8 +186,18 @@ function afficherPhotos(pseudo){
                         var title = "Photo";
                     }
 
-                    var boxe = '<div class="box size' +  nombre +  nombre +'">'
-                            + '<a href="' + link + '" target="blank"><img src="' + url + '"  title="' + title + '"></a></div>';
+                    var boxe = 
+                                '<div class="box size' +  5 +  6 +'">'
+                            +   '   <div id="containerPhoto">'
+                            +   '       <a href="' + link + '" target="blank"><img src="' + url + '"  title="' + title + '"></a>'
+                            +   '   </div>'
+                            +   '   <div id="containerActionPhoto">'
+                            +   '       <span class="left"><img title="Nombre de like" src="images/hearth.png" width="15px"> : ' + nbLike
+                            +   '           &nbsp &nbsp<img title="Nombre de commentaires" src="images/comment.png" width="15px"> : ' + nbCom 
+                            +   '       </span><span class="right">'
+                            +   '           <a href="' + dlImage + '" target="blank"><img title="Télécharger l\'image" src="images/dl.png" width="15px">'
+                            +   '           </a>&nbsp &nbsp<img title="Voir la météo" src="images/black-sun.png" width="20px">'
+                            +   '       </span></div></div>';
                     boxes.push(boxe);
                 });
 
@@ -216,13 +233,23 @@ function getIdFromPseudo(pseudo){
             action: 'getPseudo',
         },
         success: function(data) {
-          $.each( data.users, function( index, user ) {
+            console.log(data);
+            $.each( data.users, function( index, user ) {
+                console.log('<img src="' + user.profilePicture + '"');
+                // Affichage des informations sur l'utilisateur trouvé
+                $("#afficherInfosPersonne").css("display", "block");
+
+                // Remplacement du contenu
+                $("#imagePersonne").html('<img src="' + user.profilePicture + '">');
+                $("#pseudoPersonne").html(user.username);
+                $("#nomPersonne").html(user.fullName);
+                $("#descriptionPersonne").html(user.bio);
                 id = user.id;
-          });
+            });
         }
     });
 
-    console.log(id);
+
     return id;
 }
 
@@ -238,7 +265,7 @@ function setPosition(position) {
         },
 
         complete: function(response) {
-            location.reload();
+            //location.reload();
         }
     });
 
