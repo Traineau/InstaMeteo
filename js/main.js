@@ -70,7 +70,7 @@ function afficherVille(nomVille){
 
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             $("#spinner").css("display", "none");
-            $("#affichageVilleTemperature").html("<h2>Ville introuvable</h2>");
+            $("#chercherMeteoAffichage").prepend("<h2>Ville introuvable</h2>");
         }
     });
 }

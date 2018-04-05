@@ -34,6 +34,10 @@ html {
   margin: 0;
 }
 
+body{
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -181,6 +185,10 @@ img::-moz-selection {
   margin: 0 auto;
 }
 
+#chercherMeteoAffichage{
+    height: 180px;
+}
+
 #chercherMeteoAffichage p{
     text-align: center;
     margin: 0!important;
@@ -238,6 +246,10 @@ img::-moz-selection {
   }
 }
 #spinner {
+  margin: 0 auto;
+  position: absolute;
+  top: 875px;
+  left: 43.5%;
   -webkit-animation-duration: 0.75s;
   -moz-animation-duration: 0.75s;
   animation-duration: 0.75s;
@@ -256,10 +268,6 @@ img::-moz-selection {
   border-right-color: transparent;
   border-radius: 50%;
   display: inline-block;
-}
-
-#spinner{
-  margin: 0 auto;
 }
 
 /* Section rechercher une personne */
