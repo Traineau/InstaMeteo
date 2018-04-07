@@ -11,11 +11,11 @@ $(document).ready(function() {
 
     // Les deux boutons pour rechercher une ville
     $("#chercherVilleBouton").on("click", function(e) {
-        afficherVille($("#chercherVilleInput").val());
+        afficherMeteoVille($("#chercherVilleInput").val());
     });
 
     $("#chercherVilleBoutonHeader").on("click", function(e) {
-        afficherVille($("#chercherVilleInputHeader").val());
+        afficherMeteoVille($("#chercherVilleInputHeader").val());
     });
 
     // Les deux bouton pour rechercher une personne
@@ -27,17 +27,21 @@ $(document).ready(function() {
         afficherPhotos($("#chercherIdInputHeader").val());
     });
 
+    $("#buttonNextDayMeteo").on("click", function(e) {
+        afficherMeteoPlusieursJours($("#afficherVilleTemperature").data("data-ville"));
+    });
+
+    $("#buttonHideNextDay").on("click", function(e) {
+        $("#buttonNextDayMeteo").css("display", "block");
+        $("#meteoJoursSuivants").css("display", "none");
+        $("#buttonHideNextDay").css("display", "block");
+    });
+
 });
 
-function afficherVille(nomVille){
-    // On vide tous les champs
-    $("#afficherImageMeteo").html('');
-    $("#affichageVilleTemperature").html('');
-    $("#affichageTempMinMax").html('');
-    $("#affichageLeverSoleil").html('');
-    $("#affichageCoucherSoleil").html('');
+function afficherMeteoVille(nomVille){
 
-    $("#spinner").css("display", "block");
+    $("#affichageVilleTemperature").attr("data-ville", nomVille);
 
     $.ajax({
         url: 'php/model.php', // La ressource ciblée
@@ -49,10 +53,15 @@ function afficherVille(nomVille){
             ville: nomVille
         },
         success: function(retour) {
-            console.log(retour);
-            $("#spinner").css("display", "none");
 
             var infosImage = recupererImage(retour['weather'][0]['main']);
+
+            // On cache la météo des jours suivants si ils sont affichés
+            if($("#meteoJoursSuivants").css("display") !== "none"){
+                $("#buttonNextDayMeteo").css("display", "block");
+                $("#meteoJoursSuivants").css("display", "none");
+                $("#buttonHideNextDay").css("display", "block");
+            }
 
             $("#afficherImageMeteo").html('<img style="float:right;" width="150px" title="' + infosImage.titre + '" id="image_meteo" src="images/' + infosImage.path +'.png">');
 
@@ -66,13 +75,77 @@ function afficherVille(nomVille){
 
             $("#affichageLeverSoleil").html('Lever du soleil :  <span class="bold">' +  dateHeureMinute(retour['sys']['sunrise']) + ' </span>');
             $("#affichageCoucherSoleil").html('Coucher du soleil :  <span class="bold">' +  dateHeureMinute(retour['sys']['sunset']) + ' </span>');
+
+
         },
 
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            $("#spinner").css("display", "none");
             $("#chercherMeteoAffichage").prepend("<h2>Ville introuvable</h2>");
         }
     });
+}
+
+function afficherMeteoPlusieursJours(nomVille){
+    var nomVille = $("#affichageVilleTemperature").attr("data-ville");
+
+    $.ajax({
+        url: 'php/model.php', // La ressource ciblée
+        type: 'POST',
+        timeout: 3000,
+        dataType: 'JSON',
+        data: {
+            action: 'getNextDayMeteo',
+            ville: nomVille
+        },
+        success: function(retour) {
+            console.log(retour);
+            var i = 0;
+            var object = retour["list"];
+
+            // On recupere la date d'aujourd'hui pour prendre les jours suivants uniquement
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1;
+            var yyyy = today.getFullYear();
+            if(dd<10) {
+                dd = '0'+dd
+            } 
+            if(mm<10) {
+                mm = '0'+mm
+            } 
+            today = yyyy + '-' + mm + '-' + dd;
+
+            // La liste des données météo
+            $.each(object, function(index, value) {              
+
+                // On ne prend que les données présentes a 15h, donc une par jour, et on ne prend pas les données pour aujourd'hui
+                if(value["dt_txt"].includes("15:00:00") && !value["dt_txt"].includes(today)){
+                    i++;
+
+                    var infosImage = recupererImage(value['weather'][0]['main']);
+
+                    $("#meteoJoursSuivants"+i+" #afficherImageMeteo").html('<img style="float:right;" width="70px" title="' + infosImage.titre + '" id="image_meteo" src="images/' + infosImage.path +'.png">');
+
+                    $("#meteoJoursSuivants"+i+" #affichageVilleTemperature").html(value["main"]["temp"] + "°C")
+
+                    $("#meteoJoursSuivants"+i+" #affichageTempMinMax").html(
+                        '<span style="color:blue;">Min : <span class="bold">'
+                        + value['main']['temp_min'] 
+                        + ' °C</span></span><br/><span style="color:red;">Max : <span class="bold"> ' 
+                        + value['main']['temp_max'] + ' °C</span></span>');
+                }
+            });
+
+            $("#buttonNextDayMeteo").css("display", "none");
+            $("#meteoJoursSuivants").css("display", "block");
+            $("#buttonHideNextDay").css("display", "block");
+
+        },
+
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+        }
+    });
+
 }
 
 function recupererImage(weather){

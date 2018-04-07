@@ -189,6 +189,19 @@ img::-moz-selection {
     height: 180px;
 }
 
+#meteoJoursSuivants #chercherMeteoAffichage{
+    height:auto;
+}
+
+#buttonHideNextDay{
+  display: none;
+  margin: 0 auto;
+}
+
+#buttonNextDayMeteo{
+  margin: 0 auto;
+}
+
 #chercherMeteoAffichage p{
     text-align: center;
     margin: 0!important;
@@ -244,30 +257,6 @@ img::-moz-selection {
     -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-}
-#spinner {
-  margin: 0 auto;
-  position: absolute;
-  top: 875px;
-  left: 43.5%;
-  -webkit-animation-duration: 0.75s;
-  -moz-animation-duration: 0.75s;
-  animation-duration: 0.75s;
-  -webkit-animation-iteration-count: infinite;
-  -moz-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-  -webkit-animation-name: rotate-forever;
-  -moz-animation-name: rotate-forever;
-  animation-name: rotate-forever;
-  -webkit-animation-timing-function: linear;
-  -moz-animation-timing-function: linear;
-  animation-timing-function: linear;
-  height: 150px;
-  width: 150px;
-  border: 8px solid #f80;
-  border-right-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
 }
 
 /* Section rechercher une personne */

@@ -53,7 +53,27 @@ function getMeteo(){
 		die('Erreur');
 	}else{
 		$ville = $_POST['ville'];
+
+		// On enleve les espaces
+		$ville = str_replace(' ', '%20', $ville);
 		$url = 'http://api.openweathermap.org/data/2.5/weather?q='.$ville.'&APPID=1389b1a0fd9f33f0aad25e67cb48e130&units=metric';
+
+		$response = file_get_contents($url);
+
+	    echo($response);
+	}
+}
+
+function getNextDayMeteo(){
+	// Verification que la requete ajax soit passé avec un id d'utilisateur
+	if(!isset($_POST['ville'])){
+		die('Erreur');
+	}else{
+		$ville = $_POST['ville'];
+
+		// On enleve les espaces
+		$ville = str_replace(' ', '%20', $ville);
+		$url = 'http://api.openweathermap.org/data/2.5/forecast?q='.$ville.'&appid=1389b1a0fd9f33f0aad25e67cb48e130&units=metric&cnt=40';
 
 		$response = file_get_contents($url);
 

@@ -1,6 +1,7 @@
 <?php
     session_start();
-    ?>
+    $datetime = new DateTime();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -107,6 +108,10 @@
                             </div>
                             <div class="col-8 text-uppercase" style="float:left;margin-top:10px">'.$ville." ".round($data["main"]["temp"]).' °C</div>';
                     }else{
+                        $data = "";
+                        $temps = "";
+                        $title = "";
+                        $ville = "";
                         echo "Ville non trouvée";
                     }      
 ?>
@@ -168,17 +173,17 @@
                     <p class="mb-5">Vous pouvez voir ici la météo de n'importe quelle ville en direct</p>
                 </div>
 
-                <div class="clear50"></div>
-
-                <div id="spinner" style="display: none;"></div>
+                <div class="col-12">
+                    <p class="bold"><?php echo $datetime->format("d/m/Y");?></p>
+                </div>
 
                 <div id="chercherMeteoAffichage" class="col-12">
                     <div id="afficherImageMeteo" class="col-6" style="float:left;">
                         <img style="float:right;" width="150px" title="<?php echo $title?>" id="image_meteo" src="images/<?php echo $temps?>.png">
                     </div>
 
-                    <div class="col-6 text-uppercase" style="float:left;margin-top:20px;">
-                        <p id="affichageVilleTemperature" class="bold"><?php echo $ville.", ".round($data["main"]["temp"])?> °C</p><br/>
+                    <div class="col-6 mb-5 text-uppercase" style="float:left;margin-top:20px;">
+                        <p id="affichageVilleTemperature" data-ville="<?php echo $ville?>" class="bold"><?php echo $ville.", ".round($data["main"]["temp"])?> °C</p><br/>
                         <p id="affichageTempMinMax">
                             <span style="color:blue;">Min : <span class="bold"><?php echo $data['main']['temp_min']?> °C</span></span> , <span style="color:red;">Max : <span class="bold"><?php echo $data['main']['temp_max']?> °C</span></span>
                         </p><br/>
@@ -186,7 +191,84 @@
                         <p id="affichageCoucherSoleil">Coucher du soleil :  <span class="bold"><?php echo date("H:i", $data['sys']['sunset'])?></span></p><br/>
                     </div>
 
+                    <button id="buttonNextDayMeteo" type="button" class="mt-3 btn btn-primary">Voir les jours suivants</button>
                 </div>
+
+                <div id="meteoJoursSuivants" class="col-12" style="display: none;">
+                    <div class="clear50"></div>
+
+                    <div id="meteoJoursSuivants1" class="col-6 left">
+                        <div id="chercherMeteoAffichage" class="right">
+                            <p class="bold" style="padding-left:40px;"><?php $datetime->modify('+1 day');echo $datetime->format("d/m/Y");?></p><br/>
+                            <div id="afficherImageMeteo" style="float:left;">
+                                <img style="float:right;" width="70px" title="<?php echo $title?>" id="image_meteo" src="images/<?php echo $temps?>.png">
+                            </div>
+
+                            <div class="mb-5 text-uppercase" style="float:left;">
+                                <p id="affichageVilleTemperature" data-ville="<?php echo $ville?>" class="bold"><?php echo $ville.", ".round($data["main"]["temp"])?> °C</p><br/>
+                                <p id="affichageTempMinMax">
+                                    <span style="color:blue;">Min : <span class="bold"><?php echo round($data['main']['temp_min'])?> °C</span></span><br/>
+                                    <span style="color:red;">Max : <span class="bold"><?php echo round($data['main']['temp_max'])?> °C</span></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="meteoJoursSuivants2" class="col-6 left">
+                        <div id="chercherMeteoAffichage" class="left">
+                            <p class="bold" style="padding-left:40px;"><?php $datetime->modify('+1 day');echo $datetime->format("d/m/Y");?></p><br/>
+                            <div id="afficherImageMeteo" style="float:left;">
+                                <img style="float:right;" width="70px" title="<?php echo $title?>" id="image_meteo" src="images/<?php echo $temps?>.png">
+                            </div>
+
+                            <div class="mb-5 text-uppercase" style="float:left;">
+                                <p id="affichageVilleTemperature" data-ville="<?php echo $ville?>" class="bold"><?php echo $ville.", ".round($data["main"]["temp"])?> °C</p><br/>
+                                <p id="affichageTempMinMax">
+                                    <span style="color:blue;">Min : <span class="bold"><?php echo round($data['main']['temp_min'])?> °C</span></span><br/>
+                                    <span style="color:red;">Max : <span class="bold"><?php echo round($data['main']['temp_max'])?> °C</span></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="meteoJoursSuivants3" class="col-6 left">
+                        <div id="chercherMeteoAffichage" class="right">
+                            <p class="bold" style="padding-left:40px;"><?php $datetime->modify('+1 day');echo $datetime->format("d/m/Y");?></p><br/>
+                            <div id="afficherImageMeteo" style="float:left;">
+                                <img style="float:right;" width="70px" title="<?php echo $title?>" id="image_meteo" src="images/<?php echo $temps?>.png">
+                            </div>
+
+                            <div class="mb-5 text-uppercase" style="float:left;">
+                                <p id="affichageVilleTemperature" data-ville="<?php echo $ville?>" class="bold"><?php echo $ville.", ".round($data["main"]["temp"])?> °C</p><br/>
+                                <p id="affichageTempMinMax">
+                                    <span style="color:blue;">Min : <span class="bold"><?php echo round($data['main']['temp_min'])?> °C</span></span><br/>
+                                    <span style="color:red;">Max : <span class="bold"><?php echo round($data['main']['temp_max'])?> °C</span></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="meteoJoursSuivants4" class="col-6 left">
+                        <div id="chercherMeteoAffichage" class="left">
+                            <p class="bold" style="padding-left:40px;"><?php $datetime->modify('+1 day');echo $datetime->format("d/m/Y");?></p><br/>
+                            <div id="afficherImageMeteo" style="float:left;">
+                                <img style="float:right;" width="70px" title="<?php echo $title?>" id="image_meteo" src="images/<?php echo $temps?>.png">
+                            </div>
+
+                            <div class="mb-5 text-uppercase" style="float:left;">
+                                <p id="affichageVilleTemperature" data-ville="<?php echo $ville?>" class="bold"><?php echo $ville.", ".round($data["main"]["temp"])?> °C</p><br/>
+                                <p id="affichageTempMinMax">
+                                    <span style="color:blue;">Min : <span class="bold"><?php echo round($data['main']['temp_min'])?> °C</span></span><br/>
+                                    <span style="color:red;">Max : <span class="bold"><?php echo round($data['main']['temp_max'])?> °C</span></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="buttonHideNextDay" type="button" class="mt-3 btn btn-primary" style="display: none;margin:0 auto;">Cacher les météos des jours suivants</button>
+
+                </div>
+
                 <div class="col-12 chercherMeteoRecherche" style="margin-top:50px;">
                     <div class="input-group mainInput">
                         <input id="chercherVilleInput" type="text" class="form-control" placeholder="Chercher une ville ">
