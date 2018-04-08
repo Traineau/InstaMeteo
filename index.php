@@ -7,8 +7,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="description" content="Instagram Meteo API Photos Localisation">
+        <meta name="author" content="Thomas-Raineau Steven-Robillard Emeric-Mottier">
 
         <title>InstaMeteo</title>
 
@@ -348,7 +348,8 @@
 
             <p>© Tous droits réservés</p>
             <p><a href="https://github.com/Tynyndil/InstaMeteo" target="blank">Voir le code source du projet</a>
-            <p>Auteurs: <a href="mailto:emericmottier72@gmail.com">Emeric Mottier</a>, <a href="mailto:thomasraineau3@gmail.com">Steven Robillard</a>, <a href="mailto:thomasraineau3@gmail.com">Thomas Raineau</a></p>
+            <p>Auteurs: <a href="mailto:emericmottier72@gmail.com">Emeric Mottier</a>, <a href="mailto:steeven.robillard@gmail.com">Steven Robillard</a>, <a href="mailto:thomasraineau3@gmail.com">Thomas Raineau</a></p>
+            <p>Suivez-nous sur Instagram : <a target="blank" href="https://www.instagram.com/steeviny/?hl=fr">steeviny</a>, <a target="blank" href="https://www.instagram.com/thomasraineau/?hl=fr">thomasraineau</a>, <a target="blank" href="https://www.instagram.com/emeric_mottier/?hl=fr">emeric_mottier</a>
         </div>
 
     </body>
