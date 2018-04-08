@@ -87,6 +87,9 @@ function afficherMeteoVille(nomVille){
         },
 
         error: function(XMLHttpRequest, textStatus, errorThrown) {
+            $("#buttonNextDayMeteo").css("display", "block");
+            $("#meteoJoursSuivants").css("display", "none");
+            $("#buttonHideNextDay").css("display", "none");
             $("#villeIntrouvable").html("<h2>Ville introuvable</h2>");
         }
     });
@@ -105,7 +108,6 @@ function afficherMeteoPlusieursJours(nomVille){
             ville: nomVille
         },
         success: function(retour) {
-            console.log(retour);
             var i = 0;
             var object = retour["list"];
 
@@ -233,7 +235,6 @@ function afficherPhotos(pseudo){
             id: id
         },
         success: function(retour) {
-            console.log(retour);
             // Si l'utilisateur est introuvable
             if(retour["data"]["user"] == null){
                 // On cache la barre de chargement
@@ -313,9 +314,7 @@ function getIdFromPseudo(pseudo){
             action: 'getPseudo',
         },
         success: function(data) {
-            console.log(data);
             $.each( data.users, function( index, user ) {
-                console.log('<img src="' + user.profilePicture + '"');
                 // Affichage des informations sur l'utilisateur trouvé
                 $("#afficherInfosPersonne").css("display", "block");
 
