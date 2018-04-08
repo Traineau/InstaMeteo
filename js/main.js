@@ -41,6 +41,13 @@ $(document).ready(function() {
 
 function afficherMeteoVille(nomVille){
 
+    $("#afficherImageMeteo").html('');
+    $("#affichageVilleTemperature").html('');
+    $("#affichageTempMinMax").html('');
+    $("#affichageLeverSoleil").html('');
+    $("#affichageCoucherSoleil").html('');
+    $("#villeIntrouvable").html('<h2>&nbsp</h2>');
+
     $("#affichageVilleTemperature").attr("data-ville", nomVille);
 
     $.ajax({
@@ -80,7 +87,7 @@ function afficherMeteoVille(nomVille){
         },
 
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            $("#chercherMeteoAffichage").prepend("<h2>Ville introuvable</h2>");
+            $("#villeIntrouvable").html("<h2>Ville introuvable</h2>");
         }
     });
 }

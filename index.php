@@ -7,8 +7,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Instagram Meteo API Photos Localisation">
+        <meta name="description" content="Pour aider les photographes à planifier leurs shooting photos. Voir les photos d'un lieu, prévoir la météo, trouver des modèles photos, tout est possible!">
         <meta name="author" content="Thomas-Raineau Steven-Robillard Emeric-Mottier">
+        <Meta name="keywords" content="Instagram, Meteo, API, Photos, Localisation, seo, référencement, optimisation">
 
         <title>InstaMeteo</title>
 
@@ -177,6 +178,8 @@
                 </div>
 
                 <div id="chercherMeteoAffichage" class="col-12">
+                    <div id="villeIntrouvable"><h2>&nbsp</h2></div>
+
                     <div id="afficherImageMeteo" class="col-6" style="float:left;">
                         <img style="float:right;" width="150px" title="<?php echo $title?>" id="image_meteo" src="images/<?php echo $temps?>.png">
                     </div>
@@ -268,7 +271,7 @@
 
                 </div>
 
-                <div class="col-12 chercherMeteoRecherche" style="margin-top:50px;">
+                <div class="col-12 chercherMeteoRecherche" style="margin-top:100px;">
                     <div class="input-group mainInput">
                         <input id="chercherVilleInput" type="text" class="form-control" placeholder="Chercher une ville ">
                         <span class="input-group-btn">
