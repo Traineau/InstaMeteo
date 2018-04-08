@@ -286,7 +286,7 @@ function afficherPhotos(pseudo){
             // On cache la barre de chargement
             $(".progress-wrap").css("display", "none");
             // Affichage des photos récupérées
-            $('#lesPhotos').append("Une erreur est survenue, veuillez réessayer");
+            $('#lesPhotos').append("Une erreur est survenue avec l'API Instagram, veuillez réessayer");
         }
     });
 }

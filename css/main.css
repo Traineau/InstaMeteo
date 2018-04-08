@@ -304,10 +304,6 @@ img::-moz-selection {
 
 /* Les photos */
 
-#lesPhotos{
-  margin-left: 5%;
-}
-
 #containerPhoto{
   width:100%;
   height: 90%;

@@ -3,22 +3,21 @@
     $datetime = new DateTime();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
+
         <title>InstaMeteo</title>
+
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
         <link href="css/main.css" rel="stylesheet">
 		<link rel="icon" type="images/png" href="images/icone.png" />
+
         <script src="js/jquery-3.3.1.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/jquery.nested.js"></script>
         
@@ -108,10 +107,10 @@
                             </div>
                             <div class="col-8 text-uppercase" style="float:left;margin-top:10px">'.$ville." ".round($data["main"]["temp"]).' °C</div>';
                     }else{
-                        $data = "";
+                        $data = null;
                         $temps = "";
                         $title = "";
-                        $ville = "";
+                        $ville = "Ville non trouvée";
                         echo "Ville non trouvée";
                     }      
 ?>
